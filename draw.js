@@ -2,11 +2,11 @@ const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 document.addEventListener('keypress', (event) => {
     if (event.key === ' ') {
-        if (jatekos.state === "normal") {
-            jatekos.state = "jumps-up";
-            jatekos.phase = 0;
-        }
+        jump();
     }
+});
+document.addEventListener('touchstart', (event) => {
+    jump();
 });
 const parabola = [1,4,9,16,25,36,49,64,81,100,121,144,169,196,225,256,289,324,361,400,441,484,529,576,625,676,729,784,841,900,961,1024,1089,1156,1225,1296,1369,1444,1521,1600];
 const parLength = 17;
@@ -27,6 +27,13 @@ palya.push({ x: w + 50, tipus: "csapda" });
 const d3 = 90; // diameter for triangle
 const d4 = 100; // diameter for player square
 let jatekos = { y: 3*h/4 - d4/Math.sqrt(2)/2, angle: Math.PI / 4, state: "normal" }; // state: jumps-up / jumps-down
+
+function jump() {
+    if (jatekos.state === "normal") {
+        jatekos.state = "jumps-up";
+        jatekos.phase = 0;
+    }
+}
 
 function draw() {
     step += speed;
